@@ -2,6 +2,9 @@ import math, random
 
 def driver():
     print("All functions will return a position if the item is in the list, or \"no\" otherwise")
+    list = generate_list(50)
+    print(list)
+    print(insertion_sort(list))
 
 ## Generates a list of a given length
 ## List is populated with random integers between 0 and 500
@@ -96,7 +99,14 @@ def quick_sort(list):
 ## Do the same for second element, so on, until all list is sorted
 ## O(n**2)
 def insertion_sort(list):
-    pass
+    for i in range(1, len(list) - 1):
+        key = list[i]
+        j = i-1
+        while (j >= 0 and list[j] > key):
+            list[j+1] = list[j]
+            j -= 1
+        list[j+1] = key
+    return list
 
 ## Randomise the list
 ## If sorted, good
@@ -113,3 +123,7 @@ def bogo_sort(list):
 ## Relies on the concept of very large numbers and non-zero probability of bit flipping to suggest that given enough time, any list will become sorted due to chance
 def miracle_sort(list):
     pass
+
+
+
+driver()
