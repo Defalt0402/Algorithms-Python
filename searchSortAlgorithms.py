@@ -4,7 +4,7 @@ def driver():
     print("All functions will return a position if the item is in the list, or \"no\" otherwise")
     list = [10, 9, 12, 8, 13, 16, 4, 4, 7, 6, 5, 4, 3, 2, 1, 0]
     print(list)
-    print(quick_sort(list))
+    print(bogo_sort(list))
 
 ## Generates a list of a given length
 ## List is populated with random integers between 0 and 500
@@ -121,7 +121,10 @@ def insertion_sort(list):
 ## Continue until sorted
 ## O(n!)
 def bogo_sort(list):
-    pass
+    while(not isSorted(list)):
+        random.shuffle(list)
+
+    return list
 
 ## Check if list is sorted
 ## If yes, good
@@ -131,6 +134,16 @@ def bogo_sort(list):
 def miracle_sort(list):
     pass
 
+## Takes list as input
+## Checks if any values are out of order
+## If yes, list is not sorted, return false
+## Else return true
+def isSorted(list):
+    for i in range(0, len(list) - 1):
+        if list[i] > list[i+1]:
+            return False
+        
+    return True
 
 
 driver()
