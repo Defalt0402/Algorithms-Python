@@ -1,4 +1,4 @@
-import math, random
+import math, random, time
 
 def driver():
     print("All functions will return a position if the item is in the list, or \"no\" otherwise")
@@ -121,7 +121,7 @@ def insertion_sort(list):
 ## Continue until sorted
 ## O(n!)
 def bogo_sort(list):
-    while(not isSorted(list)):
+    while not isSorted(list):
         random.shuffle(list)
 
     return list
@@ -129,10 +129,13 @@ def bogo_sort(list):
 ## Check if list is sorted
 ## If yes, good
 ## If not, wait some amount of time
-## Check again
+## Check again after some time between 0 and 5 seconds
 ## Relies on the concept of very large numbers and non-zero probability of bit flipping to suggest that given enough time, any list will become sorted due to chance
 def miracle_sort(list):
-    pass
+    while not isSorted(list):
+        time.sleep(random.randint(0, 5)*1000)
+
+    return list
 
 ## Takes list as input
 ## Checks if any values are out of order
