@@ -4,7 +4,7 @@ def driver():
     print("All functions will return a position if the item is in the list, or \"no\" otherwise")
     list = [10, 9, 12, 8, 13, 16, 4, 4, 7, 6, 5, 4, 3, 2, 1, 0]
     print(list)
-    print(bogo_sort(list))
+    print(merge_sort(list))
 
 ## Generates a list of a given length
 ## List is populated with random integers between 0 and 500
@@ -30,16 +30,16 @@ def linear_search(list, value):
 def binary_search(list, value):
     head = 0
     tail = len(list) - 1  ## -1 as len counts all values, index starts at 0
-    mid = math.floor((tail + head)/2)
+    mid = (tail + head)//2
     while True:
         if list[mid] == value:
             return mid
         elif list[mid] > value:  ## If the value is at a lower point in list
             tail = mid - 1
-            mid = math.floor((tail + head)/2)
+            mid = (tail + head)//2
         elif list[mid] < value:  ## If value is at a higher point in list
             head = mid + 1
-            mid = math.floor((tail + head)/2)
+            mid = (tail + head)//2
         
         ## If checked enough times for head = tail (last possible place to check)
         ## If checked enough times for tail < head (gone past last possible check)
@@ -65,7 +65,44 @@ def bubble_sort(list):
 ## Splits lists in half until there is a list for each element
 ## Combine and compare lists next to each other, working back to having full list
 def merge_sort(list):
-    pass
+    if len(list) > 1:
+
+        # Split the list into 2 sublists
+        mid = len(list) // 2
+        left = list[:mid]
+        right = list[mid:]
+
+        # Call merge_sort for all sublists until lists of single items are generated
+        merge_sort(left)
+        merge_sort(right)
+
+        # Values used as pointers to use in comparisons
+        i = j = k = 0
+
+        # Compare the first item of each list
+        # Place the smallest in the original list in position k
+        # Do so for all elements of both lists
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+                list[k] = left[i]
+                i += 1
+            else:
+                list[k] = right[j]
+                j += 1
+            k += 1
+        
+        # If all values of one list have been added, add all from other list into the original list
+        while i < len(left):
+            list[k] = left[i]
+            i += 1
+            k += 1
+
+        while j < len(right):
+            list[k] = right[j]
+            j += 1
+            k += 1
+
+        return list
 
 ## Chooses a pivot, places all items greater than pivot in right list, all less than in left list
 ## Do the same for each new list created
