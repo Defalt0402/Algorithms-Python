@@ -2,9 +2,9 @@ import math, random
 
 def driver():
     print("All functions will return a position if the item is in the list, or \"no\" otherwise")
-    list = generate_list(50)
+    list = [10, 9, 12, 8, 13, 16, 4, 4, 7, 6, 5, 4, 3, 2, 1, 0]
     print(list)
-    print(insertion_sort(list))
+    print(quick_sort(list))
 
 ## Generates a list of a given length
 ## List is populated with random integers between 0 and 500
@@ -78,14 +78,21 @@ def quick_sort(list):
     sorted_list = []
     head = 0
     tail = len(list) - 1
-    pivot_index = math.floor((tail + head)/2)
-    pivot_value = list(pivot_index)
-    right, left = []
+    pivot_index = tail
+    
+    pivot_value = list[pivot_index]
+    right = []
+    left = []
     for i in range(tail):
         if list[i] < pivot_value:
             left.append(list[i])
         else:
             right.append(list[i])
+
+    sorted_list.extend(quick_sort(left))
+    sorted_list.append(pivot_value)
+    sorted_list.extend(quick_sort(right))
+    return sorted_list
 
     
 
